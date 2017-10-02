@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 /* eslint max-depth: ["error", 3] */
-/* eslint complexity: ["error", 8] */
+/* eslint complexity: ["error", 7] */
 'use strict';
 
 /**
@@ -10,9 +10,6 @@
 
 function isCorrectTime(time) {
     let [hours, minutes] = time.split(':');
-    if (typeof minutes === 'undefined') {
-        throw new TypeError();
-    }
     if (parseInt(hours) !== Number(hours) || Number(hours) < 0 || Number(hours) > 23) {
         throw new TypeError();
     }
@@ -52,7 +49,7 @@ function arabicToRoman(number) {
 function romanTime(time) {
     isCorrectTime(time);
     time = time.split(':');
-    if (time.length > 2) {
+    if (time.length !== 2) {
         throw new TypeError();
     }
     time = time.map(Number).map(arabicToRoman);
