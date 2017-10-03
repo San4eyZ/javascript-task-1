@@ -1,19 +1,17 @@
 /* eslint-disable linebreak-style */
 /* eslint max-depth: ["error", 3] */
-/* eslint complexity: ["error", 7] */
 'use strict';
 
-/**
- * @param {String} time – время в формате HH:MM (например, 09:05)
- * @returns {String} – время римскими цифрами (IX:V)
- */
+function isInInterval(n, a, b) {
+    return n >= a && n <= b;
+}
 
 function isCorrectTime(time) {
     let [hours, minutes] = time.split(':');
-    if (parseInt(hours) !== Number(hours) || Number(hours) < 0 || Number(hours) > 23) {
+    if (parseInt(hours) !== Number(hours) || !isInInterval(Number(hours), 0, 23)) {
         throw new TypeError();
     }
-    if (parseInt(minutes) !== Number(minutes) || Number(minutes) < 0 || Number(minutes) > 59) {
+    if (parseInt(minutes) !== Number(minutes) || !isInInterval(Number(minutes), 0, 59)) {
         throw new TypeError();
     }
 
@@ -46,15 +44,20 @@ function arabicToRoman(number) {
     return roman;
 }
 
+/**
+ * @param {String} time – время в формате HH:MM (например, 09:05)
+ * @returns {String} – время римскими цифрами (IX:V)
+ */
+
 function romanTime(time) {
-    isCorrectTime(time);
-    time = time.split(':');
-    if (time.length !== 2) {
+    let timeArray = time.split(':');
+    if (timeArray.length !== 2) {
         throw new TypeError();
     }
-    time = time.map(x => arabicToRoman(Number(x)));
+    isCorrectTime(time);
+    timeArray = timeArray.map(x => arabicToRoman(Number(x)));
 
-    return time.join(':');
+    return timeArray.join(':');
 }
 
 module.exports = romanTime;
