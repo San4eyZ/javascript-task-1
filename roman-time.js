@@ -52,7 +52,7 @@ function romanTime(time) {
     if (time.length !== 2) {
         throw new TypeError();
     }
-    time = time.map(Number).map(arabicToRoman);
+    time = time.map(x => arabicToRoman(Number(x)));
 
     return time.join(':');
 }
