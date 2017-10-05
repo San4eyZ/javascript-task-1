@@ -32,12 +32,11 @@ function arabicToRoman(number) {
         return 'N';
     }
     let roman = '';
-    for (let letter in romans) {
-        if (Object.prototype.hasOwnProperty.call(romans, letter)) {
-            while (number >= romans[letter]) {
-                roman += letter;
-                number -= romans[letter];
-            }
+    let keys = Object.keys(romans);
+    for (let letter of keys) {
+        while (number >= romans[letter]) {
+            roman += letter;
+            number -= romans[letter];
         }
     }
 
